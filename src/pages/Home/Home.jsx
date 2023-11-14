@@ -4,6 +4,7 @@ import Banner from "./Banner/Banner"
 import Category from "./Category/Category"
 import ContactUs from "./ContactUs/ContactUs"
 import Food from "./Food/Food"
+import Featured from "./Featured/Featured"
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         <PopularMenu />
         <ContactUs />
         <Food />
+        <Featured />
     </>
   )
 }
