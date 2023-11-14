@@ -7,7 +7,9 @@ const Header = () => {
       <li><Link to="/contact">Contact</Link></li>
     </>
   return (
-    <div className="navbar bg-neutral/50 text-neutral-content fixed top-0 z-10 max-w-[1920px]">
+    <header className="bg-neutral/50 text-neutral-content fixed top-0 z-10 max-w-[1920px] w-full">
+      <div className="navbar container mx-auto">
+
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -17,19 +19,19 @@ const Header = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-            >
+              >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />
+                />
             </svg>
           </label>
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
+            >
             {navOptions}
           </ul>
         </div>
@@ -43,7 +45,8 @@ const Header = () => {
       <div className="navbar-end">
         <a className="btn">Button</a>
       </div>
-    </div>
+            </div>
+    </header>
   );
 };
 
