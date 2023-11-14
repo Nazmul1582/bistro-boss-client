@@ -13,7 +13,7 @@ const PopularMenu = () => {
       })
       .catch((error) => console.log(error.message));
   }, []);
-  console.log(menu);
+
   return (
     <section className="py-20">
       <div className="container mx-auto">

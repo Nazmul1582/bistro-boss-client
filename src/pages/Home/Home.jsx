@@ -5,6 +5,7 @@ import Category from "./Category/Category"
 import ContactUs from "./ContactUs/ContactUs"
 import Food from "./Food/Food"
 import Featured from "./Featured/Featured"
+import Testimonials from "./Testimonials/Testimonials"
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
         <ContactUs />
         <Food />
         <Featured />
+        <Testimonials />
     </>
   )
 }
