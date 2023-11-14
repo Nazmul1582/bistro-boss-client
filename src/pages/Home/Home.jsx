@@ -6,10 +6,12 @@ import ContactUs from "./ContactUs/ContactUs"
 import Food from "./Food/Food"
 import Featured from "./Featured/Featured"
 import Testimonials from "./Testimonials/Testimonials"
+import Head from "../Shared/Head/Head"
 
 const Home = () => {
   return (
     <>
+        <Head pageTitle="Home" />
         <Banner />
         <Category />
         <Cover />
