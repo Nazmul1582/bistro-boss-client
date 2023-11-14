@@ -1,3 +1,4 @@
+import Cover from "../Shared/Cover/Cover"
 import Banner from "./Banner/Banner"
 import Category from "./Category/Category"
 
@@ -6,6 +7,7 @@ const Home = () => {
     <>
         <Banner />
         <Category />
+        <Cover />
     </>
   )
 }
