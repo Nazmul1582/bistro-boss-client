@@ -3,6 +3,7 @@ import Cover from "../Shared/Cover/Cover"
 import Banner from "./Banner/Banner"
 import Category from "./Category/Category"
 import ContactUs from "./ContactUs/ContactUs"
+import Food from "./Food/Food"
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         <Cover />
         <PopularMenu />
         <ContactUs />
+        <Food />
     </>
   )
 }
