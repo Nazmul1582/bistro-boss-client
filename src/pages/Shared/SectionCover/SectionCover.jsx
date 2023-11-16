@@ -1,5 +1,5 @@
 import { Parallax } from "react-parallax";
-const Cover = ({ img, title }) => {
+const SectionCover = ({ img, title }) => {
   return (
     <Parallax
       blur={{ min: -25, max: 25 }}
@@ -7,7 +7,7 @@ const Cover = ({ img, title }) => {
       bgImageAlt="the menu"
       strength={-200}
     >
-      <section
+      <div
         className="h-[700px] grid place-items-center">
           <div className="max-w-5xl p-10 md:p-20 bg-black/50 text-neutral-content text-center">
             <h2 className="text-5xl font-semibold mb-5">{title}</h2>
@@ -18,9 +18,9 @@ const Cover = ({ img, title }) => {
               nihil iusto ducimus incidunt quibusdam nemo.
             </p>
           </div>
-      </section>
+      </div>
     </Parallax>
   );
 };
 
-export default Cover;
+export default SectionCover;
