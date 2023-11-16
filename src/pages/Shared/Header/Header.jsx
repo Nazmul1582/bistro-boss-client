@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     const navOptions = <>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/about">About</Link></li>
-      <li><Link to="/contact">Contact</Link></li>
+      <li><Link className="hover:text-white uppercase" to="/">Home</Link></li>
+      <li><Link className="hover:text-white uppercase" to="/contact">Contact Us</Link></li>
+      <li><Link className="hover:text-white uppercase" to="/dashboard">Dashboard</Link></li>
+      <li><Link className="hover:text-white uppercase" to="/menu">Our Menu</Link></li>
+      <li><Link className="hover:text-white uppercase" to="/shop">Our Shop</Link></li>
     </>
   return (
     <header className="bg-neutral/50 text-neutral-content fixed top-0 z-10 max-w-[1920px] w-full">
