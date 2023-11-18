@@ -1,3 +1,20 @@
+section .react-tabs__tab-list{
+    display: flex;
+    justify-content: center;
+    border-bottom: none;
+    margin-bottom: 40px;
+}
+.react-tabs__tab-list .react-tabs__tab{
+    border: none;
+    border-bottom: 4px solid transparent;
+}
+.react-tabs__tab-list .react-tabs__tab--selected{
+    border-color: #bb8506;
+    font-weight: bold;
+    color: #bb8506;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
