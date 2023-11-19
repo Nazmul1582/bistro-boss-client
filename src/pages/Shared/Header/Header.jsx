@@ -6,7 +6,7 @@ const Header = () => {
       <li><Link className="hover:text-white uppercase" to="/contact">Contact Us</Link></li>
       <li><Link className="hover:text-white uppercase" to="/dashboard">Dashboard</Link></li>
       <li><Link className="hover:text-white uppercase" to="/menu">Our Menu</Link></li>
-      <li><Link className="hover:text-white uppercase" to="/order-food">Order Food</Link></li>
+      <li><Link className="hover:text-white uppercase" to="/order-food/salad">Order Food</Link></li>
     </>
   return (
     <header className="bg-neutral/50 text-neutral-content fixed top-0 z-10 max-w-[1920px] w-full">

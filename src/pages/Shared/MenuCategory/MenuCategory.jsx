@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import useMenu from "../../../hooks/useMenu"
 import MenuItem from "../MenuItem/MenuItem"
 
@@ -12,7 +13,7 @@ const MenuCategory = ({category, btnText}) => {
           ))}
         </div>
         <div className="mt-16 flex justify-center">
-          <button className="btn btn-outline border-0 border-b-2">{btnText ? btnText : "ORDER YOUR FAVOURITE FOOD"}</button>
+          <Link to={`/order-food/${category}`}><button className="btn btn-outline border-0 border-b-2">{btnText ? btnText : "ORDER YOUR FAVOURITE FOOD"}</button></Link>
         </div>
       </>
   )

@@ -3,9 +3,14 @@ import image from "../../assets/shop/banner2.jpg";
 import PageCover from "../Shared/PageCover/PageCover";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import { useParams } from "react-router-dom";
 
 const Order = () => {
-    const [tabIndex, setTabIndex] = useState(0);
+    const menuItems = ["salad", "pizza", "soup", 'dessert', 'drinks']
+    const { category } = useParams();
+    const initialValue = menuItems.indexOf(category);
+    const [tabIndex, setTabIndex] = useState(initialValue);
+
     return (
         <>
             <PageCover title="Order Food" img={image} />
