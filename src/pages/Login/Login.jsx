@@ -1,11 +1,30 @@
+import { useEffect, useState } from 'react';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+
+
 const Login = () => {
+    const [disabled, setDisabled] = useState(true);
+
+    useEffect(() => {
+        loadCaptchaEnginge(5)
+    }, [])
+
+    const handleCaptcha = e => {
+        const user_captch_value = e.target.value;
+        if(validateCaptcha(user_captch_value, false)){
+            setDisabled(false)
+        }else{
+            setDisabled(true)
+        }
+    }
+
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        // const captcha = form.captcha.value;
         console.log(email, password);
+
     }
   return (
     <section className="bg-base-200">
@@ -28,7 +47,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Type here"
+                  placeholder="Type your email"
                   className="input input-bordered"
                   required
                 />
@@ -45,29 +64,23 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="form-control mt-4">
-                <input
-                  type="text"
-                  className="input input-bordered"
-                  required
-                />
-                <label className="label">
-                  <a href="#" className="label-text-alt text-primary">
-                    Reload captcha
-                  </a>
-                </label>
+              <div className="mt-4">
+                <LoadCanvasTemplate />
               </div>
               <div className="form-control">
+                <label className='label'>
+                    <span className='label-text'>Enter the code above here:</span>
+                </label>
                 <input
                   type="text"
-                  name="captch"
-                  placeholder="Type here"
+                  onChange={handleCaptcha}
+                  placeholder='Enter the code above here'
                   className="input input-bordered"
                   required
                 />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-warning">Sign In</button>
+                <button disabled={disabled} className="btn btn-warning">Sign In</button>
               </div>
             </form>
           </div>
