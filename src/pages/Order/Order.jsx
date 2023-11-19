@@ -23,10 +23,10 @@ const Order = () => {
 
   return (
     <>
-        <Head pageTitle="Order Food" />
+      <Head pageTitle="Order Food" />
       <PageCover title="Order Food" img={image} />
       <section className="pt-20">
-        <div>
+        <div className="container mx-auto">
           <Tabs
             selectedIndex={tabIndex}
             onSelect={(index) => setTabIndex(index)}

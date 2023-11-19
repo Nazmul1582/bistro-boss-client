@@ -16,10 +16,24 @@ const OrderTab = ({ items }) => {
   return (
     <>
       <Swiper
-        slidesPerView={3}
-        spaceBetween={50}
+        slidesPerView={1}
+        spaceBetween={10}
         pagination={pagination}
         modules={[Pagination]}
+        breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
         className="mySwiper"
       >
         {items.map((item) => (
