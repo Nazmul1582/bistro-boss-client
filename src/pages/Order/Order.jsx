@@ -6,6 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import { useParams } from "react-router-dom";
 import useMenu from "../../hooks/useMenu";
 import OrderTab from "./OrderTab";
+import Head from "../Shared/Head/Head";
 
 const Order = () => {
   const menuItems = ["salad", "pizza", "soup", "dessert", "drinks"];
@@ -22,9 +23,10 @@ const Order = () => {
 
   return (
     <>
+        <Head pageTitle="Order Food" />
       <PageCover title="Order Food" img={image} />
       <section className="pt-20">
-        <div className="container mx-auto flex justify-center">
+        <div>
           <Tabs
             selectedIndex={tabIndex}
             onSelect={(index) => setTabIndex(index)}
