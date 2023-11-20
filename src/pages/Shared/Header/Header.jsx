@@ -3,7 +3,6 @@ import useAuth from "../../../hooks/useAuth";
 
 const Header = () => {
   const { user, logout } = useAuth();
-  console.log(user, "user");
   const navOptions = (
     <>
       <li>

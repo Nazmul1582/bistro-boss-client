@@ -1,26 +1,46 @@
 import { updateProfile } from "firebase/auth";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser } = useAuth();
-  const {register, handleSubmit, formState: { errors }} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
   const handleSignUp = (data) => {
-    const {name, email, password} = data;
+    const { name, email, password } = data;
 
     createUser(email, password, name)
-        .then(res => {
-            updateProfile(res.user, {
-                displayName: name
-            })
-                .then(() => {
-                    navigate("/")
-                })
-        })
-        .catch(error => console.log(error.message))
+      .then((res) => {
+        updateProfile(res.user, {
+          displayName: name,
+        }).then(() => {
+          Swal.fire({
+            title: "Good Job!",
+            text: "User sign up successful.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Go To Home!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
   };
 
   return (
@@ -43,11 +63,13 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("name", {required: true})}
+                  {...register("name", { required: true })}
                   placeholder="Type your Name"
                   className="input input-bordered"
                 />
-                {errors.name && <p className="text-red-500">Name is required</p>}
+                {errors.name && (
+                  <p className="text-red-500">Name is required</p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -55,11 +77,13 @@ const SignUp = () => {
                 </label>
                 <input
                   type="email"
-                  {...register("email", {required: "Email is required"})}
+                  {...register("email", { required: "Email is required" })}
                   placeholder="Type your email"
                   className="input input-bordered"
                 />
-                {errors.email && <p className="text-red-500">{errors.email?.message}</p>}
+                {errors.email && (
+                  <p className="text-red-500">{errors.email?.message}</p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -67,20 +91,52 @@ const SignUp = () => {
                 </label>
                 <input
                   type="password"
-                  {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/ })}
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                   placeholder="Enter your password"
                   className="input input-bordered"
                 />
-                {errors.password?.type === "required" && <p className="text-red-500">Password is required!</p>}
-                {errors.password?.type === "minLength" && <p className="text-red-500">Password must be 6 characters or longer.</p>}
-                {errors.password?.type === "maxLength" && <p className="text-red-500">Password must be maximum 20 characters or lower.</p>}
-                {errors.password?.type === "maxLength" && <p className="text-red-500">Password must be maximum 20 characters or lower.</p>}
-                {errors.password?.type === "pattern" && <p className="text-red-500">Password should have at least one uppercase, one lowercase, one special character and one number.</p>}
+                {errors.password?.type === "required" && (
+                  <p className="text-red-500">Password is required!</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-500">
+                    Password must be 6 characters or longer.
+                  </p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-500">
+                    Password must be maximum 20 characters or lower.
+                  </p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-500">
+                    Password must be maximum 20 characters or lower.
+                  </p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-500">
+                    Password should have at least one uppercase, one lowercase,
+                    one special character and one number.
+                  </p>
+                )}
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-warning">Sign Up</button>
               </div>
             </form>
+            <div className="text-center mb-8">
+              <p className="text-amber-500">
+                Already register?{" "}
+                <Link to="/login" className="font-semibold">
+                  Go to login
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

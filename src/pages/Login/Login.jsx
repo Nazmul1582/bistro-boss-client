@@ -1,31 +1,59 @@
-import { useEffect, useState } from 'react';
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        loadCaptchaEnginge(5)
-    }, [])
+  useEffect(() => {
+    loadCaptchaEnginge(5);
+  }, []);
 
-    const handleCaptcha = e => {
-        const user_captch_value = e.target.value;
-        if(validateCaptcha(user_captch_value, false)){
-            setDisabled(false)
-        }else{
-            setDisabled(true)
-        }
+  const handleCaptcha = (e) => {
+    const user_captch_value = e.target.value;
+    if (validateCaptcha(user_captch_value, false)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
     }
+  };
 
-    const handleLogin = event => {
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password);
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-    }
+    login(email, password)
+      .then(() => {
+        Swal.fire({
+          title: "Good Job!",
+          text: "User login successful.",
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Go To Home!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
   return (
     <section className="bg-base-200">
       <div className="hero min-h-screen container mx-auto">
@@ -68,21 +96,31 @@ const Login = () => {
                 <LoadCanvasTemplate />
               </div>
               <div className="form-control">
-                <label className='label'>
-                    <span className='label-text'>Enter the code above here:</span>
+                <label className="label">
+                  <span className="label-text">Enter the code above here:</span>
                 </label>
                 <input
                   type="text"
                   onChange={handleCaptcha}
-                  placeholder='Enter the code above here'
+                  placeholder="Enter the code above here"
                   className="input input-bordered"
                   required
                 />
               </div>
               <div className="form-control mt-6">
-                <button disabled={disabled} className="btn btn-warning">Sign In</button>
+                <button disabled={disabled} className="btn btn-warning">
+                  Sign In
+                </button>
               </div>
             </form>
+            <div className="text-center mb-8">
+              <p className="text-amber-500">
+                New here?{" "}
+                <Link to="/signup" className="font-semibold">
+                  Create a New Account
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

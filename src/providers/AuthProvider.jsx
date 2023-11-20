@@ -21,17 +21,17 @@ const AuthProvider = ({children}) => {
     }, [])
 
     const createUser = (email, password) => {
-        setLoading(true)
+        // setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const login = (email, password) => {
-        setLoading(true)
+        // setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     } 
 
     const logout = () => {
-        setLoading(true)
+        // setLoading(true)
         return signOut(auth)
     }
 
@@ -45,7 +45,7 @@ const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={authInfo}>
-            {loading ? <div className="grid place-items-center h-screen"><span className="loading loading-dots loading-lg text-warning"></span></div> : children}
+            {loading ? <div className="grid place-items-center h-screen"><span className="loading loading-ring loading-lg text-warning"></span></div> : children}
         </AuthContext.Provider>
     );
 };
