@@ -1,10 +1,12 @@
 import { updateProfile } from "firebase/auth";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { createUser } = useAuth();
   const {register, handleSubmit, formState: { errors }} = useForm();
+  const navigate = useNavigate();
 
   const handleSignUp = (data) => {
     const {name, email, password} = data;
@@ -15,7 +17,7 @@ const SignUp = () => {
                 displayName: name
             })
                 .then(() => {
-                    alert("Sign up successfully done!")
+                    navigate("/")
                 })
         })
         .catch(error => console.log(error.message))
