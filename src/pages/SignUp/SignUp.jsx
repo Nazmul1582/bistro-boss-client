@@ -1,17 +1,16 @@
 import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { createUser } = useAuth();
-  console.log(createUser);
+  const {register, handleSubmit, watch, formState: { errors }} = useForm();
 
-  const handleSignUp = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(name, email, password);
+  const handleSignUp = (data) => {
+    console.log(data);
   };
+
+  console.log(watch());
+
   return (
     <section className="bg-base-200">
       <div className="hero min-h-screen container mx-auto">
@@ -25,18 +24,18 @@ const SignUp = () => {
             </p>
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleSignUp} className="card-body">
+            <form onSubmit={handleSubmit(handleSignUp)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  {...register("name", {required: true})}
                   placeholder="Type your Name"
                   className="input input-bordered"
-                  required
                 />
+                {errors.name && <p className="text-red-500">Name is required</p>}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -44,11 +43,11 @@ const SignUp = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
+                  {...register("email", {required: "Email is required"})}
                   placeholder="Type your email"
                   className="input input-bordered"
-                  required
                 />
+                {errors.email && <p className="text-red-500">{errors.email?.message}</p>}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -56,11 +55,15 @@ const SignUp = () => {
                 </label>
                 <input
                   type="password"
-                  name="password"
+                  {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/ })}
                   placeholder="Enter your password"
                   className="input input-bordered"
-                  required
                 />
+                {errors.password?.type === "required" && <p className="text-red-500">Password is required!</p>}
+                {errors.password?.type === "minLength" && <p className="text-red-500">Password must be 6 characters or longer.</p>}
+                {errors.password?.type === "maxLength" && <p className="text-red-500">Password must be maximum 20 characters or lower.</p>}
+                {errors.password?.type === "maxLength" && <p className="text-red-500">Password must be maximum 20 characters or lower.</p>}
+                {errors.password?.type === "pattern" && <p className="text-red-500">Password should have at least one uppercase, one lowercase, one special character and one number.</p>}
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-warning">Sign Up</button>
