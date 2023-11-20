@@ -1,5 +1,8 @@
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
+  const { createUser } = useAuth();
+  console.log(createUser);
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -60,9 +63,7 @@ const SignUp = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-warning">
-                  Sign Up
-                </button>
+                <button className="btn btn-warning">Sign Up</button>
               </div>
             </form>
           </div>
