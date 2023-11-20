@@ -1,15 +1,25 @@
+import { updateProfile } from "firebase/auth";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { createUser } = useAuth();
-  const {register, handleSubmit, watch, formState: { errors }} = useForm();
+  const {register, handleSubmit, formState: { errors }} = useForm();
 
   const handleSignUp = (data) => {
-    console.log(data);
-  };
+    const {name, email, password} = data;
 
-  console.log(watch());
+    createUser(email, password, name)
+        .then(res => {
+            updateProfile(res.user, {
+                displayName: name
+            })
+                .then(() => {
+                    alert("Sign up successfully done!")
+                })
+        })
+        .catch(error => console.log(error.message))
+  };
 
   return (
     <section className="bg-base-200">
