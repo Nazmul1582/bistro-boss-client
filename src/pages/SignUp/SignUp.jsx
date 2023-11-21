@@ -2,6 +2,7 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Head from "../Shared/Head/Head";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -45,6 +46,7 @@ const SignUp = () => {
 
   return (
     <section className="bg-base-200">
+      <Head pageTitle="Sign Up" />
       <div className="hero min-h-screen container mx-auto">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">

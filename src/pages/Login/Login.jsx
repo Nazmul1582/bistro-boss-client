@@ -7,6 +7,7 @@ import {
 } from "react-simple-captcha";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import Head from "../Shared/Head/Head";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -52,6 +53,7 @@ const Login = () => {
   };
   return (
     <section className="bg-base-200">
+      <Head pageTitle="Login" />
       <div className="hero min-h-screen container mx-auto">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
