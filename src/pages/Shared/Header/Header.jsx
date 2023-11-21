@@ -67,11 +67,21 @@ const Header = () => {
         </div>
         <div className="navbar-end gap-3">
           {user ? (
-              <>
-            <h4 className="text-white font-bold text-lg">{user.displayName}</h4>
-            <Link onClick={logout} to="/login" className="btn">
-              Logout
-            </Link>
+            <>
+              <div className="flex flex-col justify-center items-center">
+                <div className="avatar">
+                  <div className="w-10 rounded-full border-2 border-warning">
+                    <img src={user?.photoURL} />
+                  </div>
+                </div>
+                <h4 className="text-white font-bold text-lg">
+                  {user.displayName}
+                </h4>
+              </div>
+
+              <Link onClick={logout} to="/login" className="btn">
+                Logout
+              </Link>
             </>
           ) : (
             <Link to="/login" className="btn">

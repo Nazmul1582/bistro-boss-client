@@ -1,36 +1,37 @@
-import { updateProfile } from "firebase/auth";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }, reset
   } = useForm();
   const navigate = useNavigate();
 
   const handleSignUp = (data) => {
-    const { name, email, password } = data;
+    const { name, email, password, photoUrl } = data;
 
-    createUser(email, password, name)
-      .then((res) => {
-        updateProfile(res.user, {
-          displayName: name,
-        }).then(() => {
+    createUser(email, password)
+      .then(() => {
+        updateUserProfile(name, photoUrl)
+        .then(() => {
           Swal.fire({
             title: "Good Job!",
-            text: "User sign up successful.",
+            text: "User sign up successfully.",
             icon: "success",
-            confirmButtonColor: "#3085d6",
-            confirmButtonText: "Go To Home!",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate("/");
-            }
+          })
+          reset();
+          navigate("/")
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.message,
           });
         });
       })
@@ -70,6 +71,18 @@ const SignUp = () => {
                 {errors.name && (
                   <p className="text-red-500">Name is required</p>
                 )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoUrl", {required: "Photo url is required!"})}
+                  placeholder="Type your Photo Url"
+                  className="input input-bordered"
+                />
+                {errors.photoUrl && <p className="text-red-500">{errors.photoUrl?.message}</p>}
               </div>
               <div className="form-control">
                 <label className="label">
