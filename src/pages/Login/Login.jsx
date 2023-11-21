@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -12,6 +12,8 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/"
 
   useEffect(() => {
     loadCaptchaEnginge(5);
@@ -38,13 +40,8 @@ const Login = () => {
           title: "Good Job!",
           text: "User login successful.",
           icon: "success",
-          confirmButtonColor: "#3085d6",
-          confirmButtonText: "Go To Home!",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/");
-          }
-        });
+        })
+        navigate(from, {replace: true})
       })
       .catch((error) => {
         Swal.fire({
