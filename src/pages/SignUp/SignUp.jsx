@@ -20,8 +20,7 @@ const SignUp = () => {
         updateUserProfile(name, photoUrl)
         .then(() => {
           Swal.fire({
-            title: "Good Job!",
-            text: "User sign up successfully.",
+            title: "User created successfully!",
             icon: "success",
           })
           reset();

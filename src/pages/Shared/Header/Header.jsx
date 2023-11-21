@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -78,6 +79,12 @@ const Header = () => {
                   {user.displayName}
                 </h4>
               </div>
+
+              <div className="indicator mr-3">
+                <span className="indicator-item badge badge-warning font-semibold">
+                  0
+                </span><AiOutlineShoppingCart className="text-5xl" />
+              </div>              
 
               <Link onClick={logout} to="/login" className="btn">
                 Logout

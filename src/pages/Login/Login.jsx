@@ -37,8 +37,7 @@ const Login = () => {
     login(email, password)
       .then(() => {
         Swal.fire({
-          title: "Good Job!",
-          text: "User login successful.",
+          title: "User logged-in successfully!",
           icon: "success",
         })
         navigate(from, {replace: true})
