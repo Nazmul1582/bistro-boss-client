@@ -1,7 +1,10 @@
 import { AiFillHome } from "react-icons/ai";
 import {
+  FaBars,
   FaCalendar,
   FaCalendarCheck,
+  FaEnvelope,
+  FaShoppingBag,
   FaShoppingCart,
   FaWallet,
 } from "react-icons/fa";
@@ -69,6 +72,29 @@ const Dashboard = () => {
             <li>
               <NavLink to="/dashboard/my-bookings">
                 <FaCalendarCheck /> My Bookings
+              </NavLink>
+            </li>
+
+            <div className="divider"></div>
+            
+            <li>
+              <NavLink to="/">
+                <AiFillHome /> Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/menu">
+                <FaBars /> Menu
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/order-food/salad">
+                <FaShoppingBag /> Shop
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">
+                <FaEnvelope /> Contact
               </NavLink>
             </li>
           </ul>
