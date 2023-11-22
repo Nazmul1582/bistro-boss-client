@@ -82,11 +82,11 @@ const Header = () => {
                 </h4>
               </div>
 
-              <div className="indicator mr-3">
+              <Link to="/dashboard/my-cart" className="indicator mr-3">
                 <span className="indicator-item badge badge-warning font-semibold">
                   {cart.length}
                 </span><AiOutlineShoppingCart className="text-4xl text-white" />
-              </div>              
+              </Link>              
 
               <Link onClick={logout} to="/login" className="btn">
                 Logout

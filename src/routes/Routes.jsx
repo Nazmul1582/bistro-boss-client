@@ -5,8 +5,9 @@ import Menu from "../pages/Menu/Menu";
 import Order from "../pages/Order/Order";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+import Cart from "../pages/Dashboard/Cart/Cart";
+import Dashboard from "../Layout/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -26,10 +27,6 @@ const router = createBrowserRouter([
                 element: <Order />
             },
             {
-                path: "dashboard",
-                element: <PrivateRoute ><Dashboard /></PrivateRoute>
-            },
-            {
                 path: "login",
                 element: <Login />
             },
@@ -38,6 +35,16 @@ const router = createBrowserRouter([
                 element: <SignUp />
             }
         ]
+    },
+    {
+        path: "dashboard",
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        children: ([
+            {
+                path: "my-cart",
+                element: <Cart />
+            }
+        ])
     }
 ])
 
