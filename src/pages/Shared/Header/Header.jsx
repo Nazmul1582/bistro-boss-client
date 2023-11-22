@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import useCart from "../../../hooks/useCart";
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const [cart] = useCart();
   const navOptions = (
     <>
       <li>
@@ -82,7 +84,7 @@ const Header = () => {
 
               <div className="indicator mr-3">
                 <span className="indicator-item badge badge-warning font-semibold">
-                  0
+                  {cart.length}
                 </span><AiOutlineShoppingCart className="text-4xl text-white" />
               </div>              
 
