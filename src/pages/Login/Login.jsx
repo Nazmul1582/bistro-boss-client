@@ -40,6 +40,8 @@ const Login = () => {
         Swal.fire({
           title: "User logged-in successfully!",
           icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
         })
         navigate(from, {replace: true})
       })
@@ -48,6 +50,8 @@ const Login = () => {
           icon: "error",
           title: "Oops...",
           text: error.message,
+          showConfirmButton: false,
+          timer: 2000
         });
       });
   };
