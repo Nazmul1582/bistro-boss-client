@@ -83,7 +83,7 @@ const Header = () => {
               <div className="indicator mr-3">
                 <span className="indicator-item badge badge-warning font-semibold">
                   0
-                </span><AiOutlineShoppingCart className="text-5xl" />
+                </span><AiOutlineShoppingCart className="text-4xl text-white" />
               </div>              
 
               <Link onClick={logout} to="/login" className="btn">
