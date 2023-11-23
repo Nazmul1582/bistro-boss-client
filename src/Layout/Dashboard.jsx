@@ -11,8 +11,10 @@ import {
 import { MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Head from "../pages/Shared/Head/Head";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+  const [ cart ] = useCart();
   return (
     <section>
       <Head pageTitle="Dashboard" />
@@ -61,7 +63,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink to="/dashboard/my-cart">
-                <FaShoppingCart /> My Cart
+                <FaShoppingCart /> My Cart ({cart.length})
               </NavLink>
             </li>
             <li>
