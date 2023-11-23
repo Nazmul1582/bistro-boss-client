@@ -2,16 +2,49 @@ import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery({
+  const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-        const res = await axiosSecure.get("/users")
-        return res.data;
-    }
-  })
+      const res = await axiosSecure.get("/users");
+      return res.data;
+    },
+  });
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "User has been deleted.",
+              icon: "success",
+            });
+          }
+        })
+        .catch(error => {
+            Swal.fire({
+                title: "Oops!",
+                text: error.message,
+                icon: "error"
+            })
+        })
+      }
+    });
+  };
   return (
     <div className="py-10 w-full">
       <SectionTitle subHeading="How many?" heading="MANAGE ALL USERS" />
@@ -39,11 +72,13 @@ const AllUsers = () => {
                   <th>{index + 1}</th>
                   <td>{name}</td>
                   <td>{email}</td>
-                  <td><button className="btn btn-warning btn-sm">
+                  <td>
+                    <button className="btn btn-warning btn-sm">
                       <FaUsers className="text-white text-lg" />
-                    </button></td>
+                    </button>
+                  </td>
                   <th>
-                    <button className="btn btn-error btn-sm">
+                    <button onClick={() => handleDeleteUser(_id)} className="btn btn-error btn-sm">
                       <FaTrashAlt className="text-white text-lg" />
                     </button>
                   </th>
