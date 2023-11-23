@@ -16,7 +16,10 @@ const FoodCard = ({item}) => {
       if(user && user.email){
         const cartItem = {
           menuId: _id,
-          email: user.email
+          email: user.email,
+          name,
+          image,
+          price
         }
         axiosSecure.post("/carts", cartItem)
           .then(res => {
