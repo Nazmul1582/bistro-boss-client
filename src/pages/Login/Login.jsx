@@ -8,13 +8,14 @@ import {
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import Head from "../Shared/Head/Head";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/"
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(5);
@@ -42,8 +43,8 @@ const Login = () => {
           icon: "success",
           showConfirmButton: false,
           timer: 1500,
-        })
-        navigate(from, {replace: true})
+        });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         Swal.fire({
@@ -51,7 +52,7 @@ const Login = () => {
           title: "Oops...",
           text: error.message,
           showConfirmButton: false,
-          timer: 2000
+          timer: 2000,
         });
       });
   };
@@ -122,7 +123,9 @@ const Login = () => {
                   Create a New Account
                 </Link>
               </p>
-            </div>
+              <div className="divider divider-primary mx-8">or</div>
+              <SocialLogin />
+            </div>            
           </div>
         </div>
       </div>
