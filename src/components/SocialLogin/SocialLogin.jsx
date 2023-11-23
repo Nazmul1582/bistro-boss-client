@@ -8,7 +8,7 @@ const SocialLogin = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-    
+
     const handleGoogleLogin = () => {
         loginWithGoogle()
             .then(() => {
@@ -30,6 +30,7 @@ const SocialLogin = () => {
     }
   return (
     <>
+      <div className="divider mx-8">or</div>
       <button onClick={handleGoogleLogin} className="btn">
         <FaGoogle />
         Google

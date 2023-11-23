@@ -123,7 +123,6 @@ const Login = () => {
                   Create a New Account
                 </Link>
               </p>
-              <div className="divider divider-primary mx-8">or</div>
               <SocialLogin />
             </div>            
           </div>

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Head from "../Shared/Head/Head";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -165,6 +166,7 @@ const SignUp = () => {
                   Go to login
                 </Link>
               </p>
+              <SocialLogin />
             </div>
           </div>
         </div>
