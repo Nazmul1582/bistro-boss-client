@@ -1,11 +1,15 @@
 import { AiFillHome } from "react-icons/ai";
 import {
   FaBars,
+  FaBookReader,
   FaCalendar,
   FaCalendarCheck,
   FaEnvelope,
+  FaList,
   FaShoppingBag,
   FaShoppingCart,
+  FaUsers,
+  FaUtensils,
   FaWallet,
 } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
@@ -15,6 +19,12 @@ import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
   const [ cart ] = useCart();
+
+  /**
+   * TODO: get admin from database
+   */
+  const isAdmin = true;
+
   return (
     <section>
       <Head pageTitle="Dashboard" />
@@ -46,7 +56,37 @@ const Dashboard = () => {
                 <h4 className="font-semibold text-xl">Restaurent</h4>
               </Link>
             </div>
+            {
+              isAdmin ? <>
+              <li>
+              <NavLink to="/dashboard/admin-home">
+                <AiFillHome /> Admin Home
+              </NavLink>
+            </li>
             <li>
+              <NavLink to="/dashboard/add-items">
+                <FaUtensils /> Add Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/manage-items">
+                <FaList /> Manage Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/manage-bookings">
+                <FaBookReader /> Manage Bookings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/all-users">
+                <FaUsers /> All Users
+              </NavLink>
+            </li>
+              </>
+              : 
+              <>
+              <li>
               <NavLink to="/dashboard/user-home">
                 <AiFillHome /> User Home
               </NavLink>
@@ -76,9 +116,11 @@ const Dashboard = () => {
                 <FaCalendarCheck /> My Bookings
               </NavLink>
             </li>
+              </>
+            }
 
             <div className="divider"></div>
-            
+            {/* Shared nav */}
             <li>
               <NavLink to="/">
                 <AiFillHome /> Home
