@@ -3,15 +3,18 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Head from "../Shared/Head/Head";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
-    formState: { errors }, reset
+    formState: { errors },
+    reset,
   } = useForm();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleSignUp = (data) => {
     const { name, email, password, photoUrl } = data;
@@ -19,21 +22,29 @@ const SignUp = () => {
     createUser(email, password)
       .then(() => {
         updateUserProfile(name, photoUrl)
-        .then(() => {
-          Swal.fire({
-            title: "User created successfully!",
-            icon: "success",
+          .then(() => {
+            const userInfo = { name, email };
+            axiosPublic.post("/users", userInfo)
+            .then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  title: "User created successfully!",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                navigate("/");
+              }
+            });
           })
-          reset();
-          navigate("/")
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: error.message,
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: error.message,
+            });
           });
-        });
       })
       .catch((error) => {
         Swal.fire({
@@ -79,11 +90,15 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("photoUrl", {required: "Photo url is required!"})}
+                  {...register("photoUrl", {
+                    required: "Photo url is required!",
+                  })}
                   placeholder="Type your Photo Url"
                   className="input input-bordered"
                 />
-                {errors.photoUrl && <p className="text-red-500">{errors.photoUrl?.message}</p>}
+                {errors.photoUrl && (
+                  <p className="text-red-500">{errors.photoUrl?.message}</p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
